@@ -1,7 +1,14 @@
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'VT323', monospace;;
 }
+
+body {
+    text-align: center;
+    background-color: linen;
+}
+
+
 
 .container {
     width: 350px;
@@ -9,7 +16,8 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    background-color: mistyrose;
+    /* background-color: mistyrose; */
+    margin: 0 auto;
 }
 
 .box {
@@ -24,7 +32,7 @@
 }
 
 .win {
-    color: yellow;
+    color: orange ;
 }
 
 .reset-btn {
@@ -32,4 +40,36 @@
     width: 100px;
     height: 40px;
     font-size: 1.2em;
+    display: block;
+    margin: 0 auto;
+    background-color: linen;
+}
+
+.hidden {
+    display: none;
+}
+
+.show-winner {
+    text-align: center;
+}
+
+.players {
+    display: flex;
+    justify-content: space-around;
+    width: 350px;
+    margin: 20px auto;
+}
+
+#player1 {
+    width: 40px;
+    height: 40px;
+    background-image: url(images/player1.png);
+    background-size: contain;
+}
+
+#player2 {
+    width: 40px;
+    height: 40px;
+    background-image: url(images/player2.png);
+    background-size: contain;
 }

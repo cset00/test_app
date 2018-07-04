@@ -5,38 +5,10 @@ console.log('tic tac toe')
 
 // --------------
 
-// Create a 3x3 grid
-// Do i generate in html or js. HTML for now.
-// create empty divs?
-
-// Have event listeners for each grid
-// Listen to 'click' function (once clicked, show element associated with each player. 
-// Can't click on the same grid again)
-
-// Create variables for player1 and player2
-// Assign diff elements to p1 and p2 (eg. o and x)
-
-// Once player1 clicks, switch to player2
-
-// Figure out how to know if 3 of the same elements are connected in a straight line
-
-// Show winner
-
-// Restart game
-
-// ------------------
-
-var currentPlayer = 0
-
-var p1Element = 'x'
-var p2Element = 'o'
-
-var p1Counter = 0
-var p2Counter = 0
-
 var container = document.querySelector('.container')
 var boxes = document.querySelectorAll('.box')
 var resetBtn = document.querySelector('.reset-btn')
+var declareStatus = document.querySelector('div h2')
 var one = document.querySelector('#one')
 var two = document.querySelector('#two')
 var three = document.querySelector('#three')
@@ -47,7 +19,57 @@ var seven = document.querySelector('#seven')
 var eight = document.querySelector('#eight')
 var nine = document.querySelector('#nine')
 
+var currentPlayer = 'x'
+
+var p1WinCounter = 0
+var p2WinCounter = 0
+
 var timerID
+var totalMoves = 0
+var p1moves = 0
+var p2moves = 0
+
+// create a function to check if a player has won
+// start with winning combos
+// horizontal: 123, 456, 789
+// vertical: 147, 258, 369
+// diagonal: 159,357
+
+//NOTE: NEED TO FIGURE OUT IF MORE THAN 1 COMBO WINS 
+var checkWin = function() {
+    if (one.textContent === currentPlayer && two.textContent === currentPlayer && three.textContent === currentPlayer) {
+        console.log('123')
+        showWinner(one,two,three)
+    } else if (one.textContent === currentPlayer && four.textContent === currentPlayer && seven.textContent === currentPlayer) {
+        console.log('147')
+        showWinner(one,four,seven)
+    } else if (one.textContent === currentPlayer && five.textContent === currentPlayer && nine.textContent === currentPlayer) {
+        console.log('159')
+        showWinner(one,five,nine)
+    } else if (two.textContent === currentPlayer && five.textContent === currentPlayer && eight.textContent === currentPlayer) {
+        console.log('258')
+        showWinner(two,five,eight)
+    } else if (three.textContent === currentPlayer && six.textContent === currentPlayer && nine.textContent === currentPlayer) {
+        console.log('369')
+        showWinner(three,six,nine)
+    } else if (three.textContent === currentPlayer && five.textContent === currentPlayer && seven.textContent === currentPlayer) {
+        console.log('357')
+        showWinner(three,five,seven)
+    } else if (four.textContent === currentPlayer && five.textContent === currentPlayer && six.textContent === currentPlayer) {
+        console.log('456')
+        showWinner(four,five,six)
+    } else if (seven.textContent === currentPlayer && eight.textContent === currentPlayer && nine.textContent === currentPlayer) {
+        console.log('789')
+        showWinner(seven,eight,nine)
+    } else {
+        if (totalMoves === 9) {
+            console.log("It's a DRAW")
+            declareStatus.textContent = "It's a DRAW!"
+            declareStatus.classList.remove('hidden')
+        }
+    }
+}
+
 
 var takeTurn = function() {
     //ignore if target clicked is not .box
@@ -55,41 +77,43 @@ var takeTurn = function() {
         return
     }
     //ignore if target clicked has p1 or p2 element already
-    if(event.target.textContent === p1Element || event.target.textContent === p2Element) {
+    if(event.target.textContent === 'x' || event.target.textContent === 'o') {
         return
     }
-
-    if (currentPlayer === 0) {
-        //show x
-        event.target.textContent = p1Element
-        currentPlayer = 1
+    if (currentPlayer === 'x') {
+        event.target.textContent = 'x'
+        totalMoves++
         checkWin()
+        currentPlayer = 'o'    
     } else {
-        //show o
-        event.target.textContent = p2Element
-        currentPlayer = 0
+        event.target.textContent = 'o'
+        totalMoves++
         checkWin()
+        currentPlayer = 'x'
     }
 }
 
-// create a function to check if a player has won
-var checkWin = function() {
-
+var showWinner = function(box1, box2, box3) {
+    container.removeEventListener('click',takeTurn)
+    box1.classList.add('win')
+    box2.classList.add('win')
+    box3.classList.add('win')
+    declareStatus.textContent = currentPlayer.toUpperCase() + ' is the winner!'
+    declareStatus.classList.remove('hidden')
 }
 
-
-
-// create a reset function
 var reset = function() {
     boxes.forEach(function(box) {
         box.textContent = ""
-        
+        box.classList.remove('win')
     })
-    player = 0
+    currentPlayer = 'x'
+    totalMoves = 0
+    container.addEventListener('click', takeTurn)
+    declareStatus.classList.add('hidden')
     console.log('reset')
 }
 
-//add event listener on the parent of the boxes.
+//event listeners
 container.addEventListener('click', takeTurn)
-
 resetBtn.addEventListener('click', reset)
