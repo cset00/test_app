@@ -13,32 +13,40 @@
         <h1>Tic Tac RAWR...</h1>
     </header>
     <div class="container">
-        <div class="box" id="one"></div>
-        <div class="box" id="two"></div>
-        <div class="box" id="three"></div>
-        <div class="box" id="four"></div>
-        <div class="box" id="five"></div>
-        <div class="box" id="six"></div>
-        <div class="box" id="seven"></div>
-        <div class="box" id="eight"></div>
-        <div class="box" id="nine"></div>
-    </div>
-    <div class="show-winner">
-        <h2 class="hidden"></h2>
-    </div>
-    <button class="reset-btn">Reset</button>
-    <div class="players">
-        <div>
-            <p>Player 1: </p>
-            <div id=player1></div>
+        <aside>
+            
+            <div class="players-box">
+                <p class="p1color">Player 1 </p>
+                <div id="player1"></div>
+            </div>
+            <div class="arrow1 hidden"></div>
+        </aside>
+        <div class="game-container">
+            <div class="box" id="one"></div>
+            <div class="box" id="two"></div>
+            <div class="box" id="three"></div>
+            <div class="box" id="four"></div>
+            <div class="box" id="five"></div>
+            <div class="box" id="six"></div>
+            <div class="box" id="seven"></div>
+            <div class="box" id="eight"></div>
+            <div class="box" id="nine"></div>
         </div>
-        <div>
-            <p>Player 2: </p>
-            <div id=player2></div>
-        </div>
-        
+        <aside>
+            
+            <div class="players-box">
+                <p class="p2color">Player 2 </p>
+                <div id="player2"></div>  
+            </div>
+            <div class="arrow2 hidden"></div>
+        </aside>
     </div>
-
+    <div>
+        <div class="show-winner">
+            <h2>who's going to win?!</h2>
+        </div>
+        <button class="reset-btn">Reset</button>
+    </div>        
     <script src="app.js"></script>
 </body>
 </html>

@@ -1,9 +1,4 @@
-console.log('tic tac toe')
-//Break the project down into different components 
-// (data, presentation, markup, style, DOM manipulation) and 
-// brainstorm each component individually. Use whiteboards!
-
-// --------------
+console.log('tic tac rawr')
 
 var container = document.querySelector('.container')
 var boxes = document.querySelectorAll('.box')
@@ -18,6 +13,10 @@ var six = document.querySelector('#six')
 var seven = document.querySelector('#seven')
 var eight = document.querySelector('#eight')
 var nine = document.querySelector('#nine')
+var playersBox1 = document.querySelectorAll('.players-box')[0]
+var playersBox2 = document.querySelectorAll('.players-box')[1]
+var arrowPurple = document.querySelector('.arrow1')
+var arrowYellow = document.querySelector('.arrow2')
 
 var currentPlayer = 'x'
 
@@ -63,9 +62,7 @@ var checkWin = function() {
         showWinner(seven,eight,nine)
     } else {
         if (totalMoves === 9) {
-            console.log("It's a DRAW")
-            declareStatus.textContent = "It's a DRAW!"
-            declareStatus.classList.remove('hidden')
+            itsaDraw()
         }
     }
 }
@@ -81,11 +78,15 @@ var takeTurn = function() {
         return
     }
     if (currentPlayer === 'x') {
+        highlightCurrent()
+        event.target.classList.add('p1color')
         event.target.textContent = 'x'
         totalMoves++
         checkWin()
-        currentPlayer = 'o'    
+        currentPlayer = 'o'  
     } else {
+        highlightCurrent()
+        event.target.classList.add('p2color')
         event.target.textContent = 'o'
         totalMoves++
         checkWin()
@@ -93,24 +94,57 @@ var takeTurn = function() {
     }
 }
 
+var highlightCurrent = function() {
+    if (currentPlayer === 'o') {
+        playersBox1.classList.add('selected')
+        playersBox2.classList.remove('selected')
+        arrowYellow.classList.add('hidden')
+        arrowPurple.classList.remove('hidden')
+    } else {
+        playersBox2.classList.add('selected')
+        playersBox1.classList.remove('selected')
+        arrowPurple.classList.add('hidden')
+        arrowYellow.classList.remove('hidden')
+    }
+}
+
 var showWinner = function(box1, box2, box3) {
     container.removeEventListener('click',takeTurn)
+    playersBox1.classList.remove('selected')
+    playersBox2.classList.remove('selected')
+    arrowPurple.classList.add('hidden')
+    arrowYellow.classList.add('hidden')
     box1.classList.add('win')
     box2.classList.add('win')
     box3.classList.add('win')
     declareStatus.textContent = currentPlayer.toUpperCase() + ' is the winner!'
+}
+
+var itsaDraw = function() {
+    console.log("It's a DRAW")
+    declareStatus.textContent = "It's a DRAW!"
     declareStatus.classList.remove('hidden')
+    playersBox1.classList.remove('selected')
+    playersBox2.classList.remove('selected')
+    arrowPurple.classList.add('hidden')
+    arrowYellow.classList.add('hidden')
 }
 
 var reset = function() {
     boxes.forEach(function(box) {
         box.textContent = ""
         box.classList.remove('win')
+        box.classList.remove('p1color')
+        box.classList.remove('p2color')
     })
     currentPlayer = 'x'
     totalMoves = 0
     container.addEventListener('click', takeTurn)
-    declareStatus.classList.add('hidden')
+    declareStatus.textContent = "who's going to win?!"
+    playersBox1.classList.remove('selected')
+    playersBox2.classList.remove('selected')
+    arrowPurple.classList.add('hidden')
+    arrowYellow.classList.add('hidden')
     console.log('reset')
 }
 
