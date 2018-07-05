@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Tic Tac RAWR...</h1>
+    </header>
+    <div class="container">
+        <aside>
+            <div class="players-box">
+                <p class="p1color">Player 1 </p>
+                <div id="player1"></div>
+            </div>
+            <div class="arrow1 hidden"></div>
+        </aside>
+        <div class="board">
+            <div class = "box" data-row='0' data-col='0'></div>
+            <div class = "box" data-row='0' data-col='1'></div>
+            <div class = "box" data-row='0' data-col='2'></div>
+            <div class = "box" data-row='1' data-col='0'></div>
+            <div class = "box" data-row='1' data-col='1'></div>
+            <div class = "box" data-row='1' data-col='2'></div>
+            <div class = "box" data-row='2' data-col='0'></div>
+            <div class = "box" data-row='2' data-col='1'></div>
+            <div class = "box" data-row='2' data-col='2'></div>
+        </div>
+        <aside>
+            <div class="players-box">
+                <p class="p2color">Player 2 </p>
+                <div id="player2"></div>  
+            </div>
+            <div class="arrow2 hidden"></div>
+        </aside>
+    </div>
+    <div>
+        <div class="show-winner">
+            <h2>who's going to win?!</h2>
+        </div>
+        <button class="reset-btn">Reset</button>
+    </div>
+    <script src="app2.js"></script>
+</body>
+</html>

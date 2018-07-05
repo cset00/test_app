@@ -20,13 +20,7 @@ var arrowYellow = document.querySelector('.arrow2')
 
 var currentPlayer = 'x'
 
-var p1WinCounter = 0
-var p2WinCounter = 0
-
-var timerID
 var totalMoves = 0
-var p1moves = 0
-var p2moves = 0
 
 // create a function to check if a player has won
 // start with winning combos
@@ -34,9 +28,21 @@ var p2moves = 0
 // vertical: 147, 258, 369
 // diagonal: 159,357
 
-//NOTE: NEED TO FIGURE OUT IF MORE THAN 1 COMBO WINS 
+//NOTE: NEED TO FIGURE OUT IF MORE THAN 1 COMBO WINS.. done.. but... 
 var checkWin = function() {
-    if (one.textContent === currentPlayer && two.textContent === currentPlayer && three.textContent === currentPlayer) {
+    if (one.textContent === currentPlayer && two.textContent === currentPlayer && three.textContent === currentPlayer && six.textContent === currentPlayer && nine.textContent === currentPlayer) {
+        console.log('12369')
+        showWinner2(one,two,three,six,nine)
+    } else if (one.textContent === currentPlayer && two.textContent === currentPlayer && three.textContent === currentPlayer && four.textContent === currentPlayer && seven.textContent === currentPlayer) {
+        console.log('12347')
+        showWinner2(one,two,three,four,seven)
+    } else if (one.textContent === currentPlayer && four.textContent === currentPlayer && seven.textContent === currentPlayer && eight.textContent === currentPlayer && nine.textContent === currentPlayer) {
+        console.log('14789')
+        showWinner2(one,four,seven,eight,nine)
+    } else if (three.textContent === currentPlayer && six.textContent === currentPlayer && nine.textContent === currentPlayer && seven.textContent === currentPlayer && eight.textContent === currentPlayer) {
+        console.log('36987')
+        showWinner2(three,six,nine,eight,seven)
+    } else if (one.textContent === currentPlayer && two.textContent === currentPlayer && three.textContent === currentPlayer) {
         console.log('123')
         showWinner(one,two,three)
     } else if (one.textContent === currentPlayer && four.textContent === currentPlayer && seven.textContent === currentPlayer) {
@@ -49,7 +55,7 @@ var checkWin = function() {
         console.log('258')
         showWinner(two,five,eight)
     } else if (three.textContent === currentPlayer && six.textContent === currentPlayer && nine.textContent === currentPlayer) {
-        console.log('369')
+          console.log('369')
         showWinner(three,six,nine)
     } else if (three.textContent === currentPlayer && five.textContent === currentPlayer && seven.textContent === currentPlayer) {
         console.log('357')
@@ -117,7 +123,30 @@ var showWinner = function(box1, box2, box3) {
     box1.classList.add('win')
     box2.classList.add('win')
     box3.classList.add('win')
-    declareStatus.textContent = currentPlayer.toUpperCase() + ' is the winner!'
+    if (currentPlayer === 'x') {
+        declareStatus.textContent = 'Player 1 is the winner!'
+    } else {
+        declareStatus.textContent = 'Player 2 is the winner!'
+    }  
+}
+
+//omg... help... SORRY.. D:
+var showWinner2 = function(box1,box2,box3,box4,box5) {
+    container.removeEventListener('click',takeTurn)
+    playersBox1.classList.remove('selected')
+    playersBox2.classList.remove('selected')
+    arrowPurple.classList.add('hidden')
+    arrowYellow.classList.add('hidden')
+    box1.classList.add('win')
+    box2.classList.add('win')
+    box3.classList.add('win')
+    box4.classList.add('win')
+    box5.classList.add('win')
+    if (currentPlayer === 'x') {
+        declareStatus.textContent = 'Player 1 is the winner!'
+    } else {
+        declareStatus.textContent = 'Player 2 is the winner!'
+    } 
 }
 
 var itsaDraw = function() {
