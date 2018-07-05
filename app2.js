@@ -20,13 +20,13 @@ createBoard(boardSize)
 var boardSelector = document.querySelector('.board')
 var boxes = document.querySelectorAll('.box')
 var resetBtn = document.querySelector('.reset-btn')
-var declareStatus = document.querySelector('div h2')
+var declareStatus = document.querySelector('.show-winner h2')
 var playersBox1 = document.querySelectorAll('.players-box')[0]
 var playersBox2 = document.querySelectorAll('.players-box')[1]
 var arrowPurple = document.querySelector('.arrow1')
 var arrowYellow = document.querySelector('.arrow2')
 
-var currentPlayer = 'o'
+var currentPlayer = 'x'
 var totalMoves = 0
 var gameOngoing = true
 
@@ -158,8 +158,10 @@ var showWinner = function() {
     arrowYellow.classList.add('hidden')
     if (currentPlayer === 'x') {
         declareStatus.textContent = 'Player 1 is the winner!'
+        playersBox1.classList.add('win-highlight')
     } else {
         declareStatus.textContent = 'Player 2 is the winner!'
+        playersBox2.classList.add('win-highlight')
     } 
 }
 
@@ -184,16 +186,15 @@ var reset = function() {
         box.classList.remove('p1color')
         box.classList.remove('p2color')
     })
-    board = []
+    playersBox1.classList.remove('win-highlight')
+    playersBox2.classList.remove('win-highlight')
     gameOngoing = true
     currentPlayer = 'x'
     totalMoves = 0
     boardSelector.addEventListener('click', takeTurn)
     declareStatus.textContent = "who's going to win?!"
-    playersBox1.classList.remove('selected')
-    playersBox2.classList.remove('selected')
-    arrowPurple.classList.add('hidden')
-    arrowYellow.classList.add('hidden')
+    board = []
+    createBoard(boardSize)
     console.log('reset')
 }
 

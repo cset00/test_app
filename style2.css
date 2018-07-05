@@ -107,6 +107,11 @@ p {
     transition: all 0.3s linear;
 }
 
+.win-highlight {
+    background-image: url(images/YpGQ.gif);
+    transition: all 0.3s linear;
+}
+
 
 aside {
     /* background-color: plum; */
