@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="css/style2.css">
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/csshake-crazy.css">
 </head>
 <body>
     <header>
@@ -18,7 +19,8 @@
                 <p class="p1color">Player 1 </p>
                 <div id="player1"></div>
             </div>
-            <div class="arrow1 hidden"></div>
+            <div class="winNum1">Wins: 0</div>
+            <div class="arrow1 flipInX hidden"></div>
         </aside>
         <div class="board">
             <div class = "box" data-row='0' data-col='0'></div>
@@ -36,15 +38,29 @@
                 <p class="p2color">Player 2 </p>
                 <div id="player2"></div>  
             </div>
-            <div class="arrow2 hidden"></div>
+            <div class="winNum2">Wins: 0</div>
+            <div class="arrow2 flipInX hidden"></div>
         </aside>
     </div>
     <div>
         <div class="show-winner">
             <h2>who's going to win?!</h2>
         </div>
-        <button class="reset-btn">Reset</button>
+        <button class="play-again-btn">Play Again</button>
+        <button class="reset-btn">Reset All</button>
     </div>
-    <script src="app2.js"></script>
+    <footer>
+        <p>
+            Credits:
+            <ul>
+                <li>Artwork: <a href="https://0x72.itch.io/16x16-dungeon-tileset">16x16 Dungeon Tileset</a></li>
+                <!-- <li>CSS flip animation on arrows: <a href="https://github.com/daneden/animate.css">daneden</a></li> -->
+                <li>CSS shake animation on win: <a href="https://elrumordelaluz.github.io/csshake/">elrumordelaluz</a></li>
+            </ul>
+
+        </p>
+
+    </footer>
+    <script src="js/app2.js"></script>
 </body>
 </html>

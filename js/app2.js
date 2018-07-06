@@ -4,6 +4,9 @@ var boardSize = 3
 var test = '#'
 var board = []
 
+var p1winscore = 0
+var p2winscore = 0
+
 var createHori = function(num) {
     board.push(test.repeat(num).split(""))
 }
@@ -25,6 +28,10 @@ var playersBox1 = document.querySelectorAll('.players-box')[0]
 var playersBox2 = document.querySelectorAll('.players-box')[1]
 var arrowPurple = document.querySelector('.arrow1')
 var arrowYellow = document.querySelector('.arrow2')
+var p1wins = document.querySelector('.winNum1')
+var p2wins = document.querySelector('.winNum2')
+var playAgainBtn = document.querySelector('.play-again-btn')
+
 
 var currentPlayer = 'x'
 var totalMoves = 0
@@ -141,7 +148,6 @@ var takeTurn = function() {
 var itsaDraw = function() {
     console.log("It's a DRAW")
     declareStatus.textContent = "It's a DRAW!"
-    // declareStatus.classList.remove('hidden')
     playersBox1.classList.remove('selected')
     playersBox2.classList.remove('selected')
     arrowPurple.classList.add('hidden')
@@ -156,12 +162,19 @@ var showWinner = function() {
     playersBox2.classList.remove('selected')
     arrowPurple.classList.add('hidden')
     arrowYellow.classList.add('hidden')
+
     if (currentPlayer === 'x') {
         declareStatus.textContent = 'Player 1 is the winner!'
         playersBox1.classList.add('win-highlight')
+        p1winscore ++
+        p1wins.textContent = 'Wins: ' + p1winscore
+        document.querySelector('#player1').classList.add("shake-crazy", "shake-constant")
     } else {
         declareStatus.textContent = 'Player 2 is the winner!'
         playersBox2.classList.add('win-highlight')
+        p2winscore ++
+        p2wins.textContent = 'Wins: ' + p2winscore
+        document.querySelector('#player2').classList.add("shake-crazy", "shake-constant")
     } 
 }
 
@@ -179,7 +192,7 @@ var highlightCurrent = function() {
     }
 }
 
-var reset = function() {
+var playAgain = function() {
     boxes.forEach(function(box) {
         box.textContent = ""
         box.classList.remove('win')
@@ -188,8 +201,9 @@ var reset = function() {
     })
     playersBox1.classList.remove('win-highlight')
     playersBox2.classList.remove('win-highlight')
+    document.querySelector('#player1').classList.remove("shake-crazy", "shake-constant")
+    document.querySelector('#player2').classList.remove("shake-crazy", "shake-constant")
     gameOngoing = true
-    currentPlayer = 'x'
     totalMoves = 0
     boardSelector.addEventListener('click', takeTurn)
     declareStatus.textContent = "who's going to win?!"
@@ -198,6 +212,15 @@ var reset = function() {
     console.log('reset')
 }
 
+var reset = function() {
+    playAgain()
+    p1winscore = 0
+    p1wins.textContent = 'Wins: ' + p1winscore
+    p2winscore = 0
+    p2wins.textContent = 'Wins: ' + p2winscore
+}
+
 //event listeners
 boardSelector.addEventListener('click', takeTurn)
+playAgainBtn.addEventListener('click', playAgain)
 resetBtn.addEventListener('click', reset)
